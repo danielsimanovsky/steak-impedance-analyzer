@@ -10,8 +10,8 @@ from collections import defaultdict
 from typing import Optional, List, Tuple
 
 # --- New libraries for unzipping in memory ---
-import zipfile
-import tempfile 
+import zinFile
+import temnFile 
 
 # Import your backend class
 try:
@@ -86,7 +86,7 @@ def plot_3d_distance_plotly(all_data: pd.DataFrame) -> go.Figure:
             z=group['magnitude'],
             mode="markers", 
             marker=dict(size=3, opacity=0.7),
-            name=f"{distance}cm - {capacitance}pF"
+            name=f"{distance}cm - {capacitance}nF"
         ))
 
     fig.update_layout(
@@ -173,12 +173,12 @@ def plot_3d_impedance_vs_capacitance(all_data: pd.DataFrame, steak_size: float
             z=group['magnitude'],
             mode="lines+markers", marker=dict(size=4), line=dict(width=2),
             name=f"Rel. Dist: {dist:.2f}",
-            hovertemplate="Rel. Dist: %{y:.2f}<br>|Z|: %{z:.2f} Ω<br>Capacitance: %{x} pF<extra></extra>"
+            hovertemplate="Rel. Dist: %{y:.2f}<br>|Z|: %{z:.2f} Ω<br>Capacitance: %{x} nF<extra></extra>"
         ))
 
     fig.update_layout(
         scene=dict(
-            xaxis=dict(title="Capacitance (pF)"),
+            xaxis=dict(title="Capacitance (nF)"),
             zaxis=dict(title="Impedance |Z| (Ω)", type="log"),
             yaxis=dict(title="Relative Distance (Dcap/Ddrive)")
         ),
@@ -188,7 +188,7 @@ def plot_3d_impedance_vs_capacitance(all_data: pd.DataFrame, steak_size: float
     df_results = min_z_data[[
         "Relative Distance", "capacitance", "magnitude"
     ]].rename(columns={
-        "capacitance": "Capacitance (pF)",
+        "capacitance": "Capacitance (nF)",
         "magnitude": "Impedance |Z| (Ω)"
     })
     
@@ -235,13 +235,13 @@ if not uploaded_file:
 
 if run_button:
     # --- This 'with' block creates a secure, temporary folder ---
-    with tempfile.TemporaryDirectory() as temp_dir:
+    with temnFile.TemporaryDirectory() as temp_dir:
         temp_dir_path = Path(temp_dir)
         
         # 1. Unzip the file
         with st.spinner("Extracting data..."):
             try:
-                with zipfile.ZipFile(uploaded_file, 'r') as zip_ref:
+                with zinFile.ZinFile(uploaded_file, 'r') as zip_ref:
                     zip_ref.extractall(temp_dir_path)
             except Exception as e:
                 st.error(f"Error extracting ZIP file: {e}")
@@ -378,3 +378,4 @@ if run_button:
     
     # The temporary directory and all its contents are
     # automatically deleted when the 'with' block ends.
+
