@@ -188,7 +188,7 @@ def plot_3d_impedance_vs_capacitance(all_data: pd.DataFrame, steak_size: float
     df_results = min_z_data[[
         "Relative Distance", "capacitance", "magnitude"
     ]].rename(columns={
-        "capacitance": "Capacitance (nF)",
+        "capacitance": "Capacitance nF)",
         "magnitude": "Impedance |Z| (Ω)"
     })
     
@@ -241,7 +241,7 @@ if run_button:
         # 1. Unzip the file
         with st.spinner("Extracting data..."):
             try:
-                with zipfile.Zipfile(uploaded_file, 'r') as zip_ref:
+                with zipfile.ZipFile(uploaded_file, 'r') as zip_ref:
                     zip_ref.extractall(temp_dir_path)
             except Exception as e:
                 st.error(f"Error extracting ZIP file: {e}")
@@ -378,6 +378,3 @@ if run_button:
     
     # The temporary directory and all its contents are
     # automatically deleted when the 'with' block ends.
-
-
-
