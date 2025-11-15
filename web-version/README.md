@@ -77,7 +77,7 @@ Open your terminal (CMD, PowerShell, etc.).
 
 Navigate to the local-version folder:
 
-cd path/to/repository/local-version
+cd path\to\repository\local-version
 
 
 (Recommended) Create & activate a virtual environment:
